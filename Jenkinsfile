@@ -10,12 +10,12 @@ agent {
     }
   }
 
-  stages {
-    stage('Checkout') {
-      steps {
-        checkout(scm)
-      }
-    }
+//   stages {
+//     stage('Checkout') {
+//       steps {
+//         checkout(scm)
+//       }
+//     }
 
     stage('Build') {
       steps {
