@@ -1,44 +1,19 @@
+
+
 pipeline {
-  /*
-   * TODO: Implement pipeline stages/steps
-   *   See documentation: https://www.jenkins.io/doc/book/pipeline/syntax/#stages
-   */
-
-agent {
-    docker {
-      image 'gradle:7.0.2-jdk11'
+    // See documentation: https://www.jenkins.io/doc/book/pipeline/syntax/#stages
+    agent any
+    stages {
+        stage("Build") {
+            steps {
+                sh "./gradlew assemble"
+            }
+        }
+        stage("Test") {
+            steps {
+                sh "./gradlew test"
+            }
+        }
     }
-  }
-
-//   stages {
-//     stage('Checkout') {
-//       steps {
-//         checkout(scm)
-//       }
-//     }
-
-    stage('Build') {
-      steps {
-        // sh 'gradle clean build'
-        ./gradlew assemble
-      }
-    }
-
-    stage('Test') {
-      steps {
-        // sh 'gradle test'
-        ./gradlew test
-      }
-    }
-
-    // stage('Deploy') {
-    //   steps {
-    //     sh 'gradle deploy'
-    //   }
-    // }
-  }
-
-  triggers {
-    githubPush()
-  }
 }
+
