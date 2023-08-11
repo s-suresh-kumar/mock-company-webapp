@@ -19,21 +19,23 @@ agent {
 
     stage('Build') {
       steps {
-        sh 'gradle clean build'
+        // sh 'gradle clean build'
+        ./gradlew assemble.
       }
     }
 
     stage('Test') {
       steps {
-        sh 'gradle test'
+        // sh 'gradle test'
+        ./gradlew test
       }
     }
 
-    stage('Deploy') {
-      steps {
-        sh 'gradle deploy'
-      }
-    }
+    // stage('Deploy') {
+    //   steps {
+    //     sh 'gradle deploy'
+    //   }
+    // }
   }
 
   triggers {
