@@ -4,8 +4,39 @@ pipeline {
    *   See documentation: https://www.jenkins.io/doc/book/pipeline/syntax/#stages
    */
 
-   stages {
-    Build: ./gradlew assemble
-    Test: ./gradlew test
-   }
+agent {
+    docker {
+      image 'gradle:7.0.2-jdk11'
+    }
+  }
+
+  stages {
+    stage('Checkout') {
+      steps {
+        checkout(scm)
+      }
+    }
+
+    stage('Build') {
+      steps {
+        sh 'gradle clean build'
+      }
+    }
+
+    stage('Test') {
+      steps {
+        sh 'gradle test'
+      }
+    }
+
+    stage('Deploy') {
+      steps {
+        sh 'gradle deploy'
+      }
+    }
+  }
+
+  triggers {
+    githubPush()
+  }
 }
