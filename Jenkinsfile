@@ -20,7 +20,7 @@ agent {
     stage('Build') {
       steps {
         // sh 'gradle clean build'
-        ./gradlew assemble.
+        ./gradlew assemble
       }
     }
 
